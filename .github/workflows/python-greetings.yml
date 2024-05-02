@@ -96,7 +96,7 @@ jobs:
         run: |
              cd preprod
              ls -a
-             pm2 delete greetings-app-preprod & set "errorlevel=0"
+             
              pm2 start app.py --name greetings-app-preprod -- --port 7003
         shell: bash
       
@@ -125,7 +125,7 @@ jobs:
         run: |
              cd prod
              ls -a
-             pm2 delete greetings-app-prod & set "errorlevel=0"
+             
              pm2 start app.py --name greetings-app-prod -- --port 7004
         shell: bash
       
