@@ -58,8 +58,7 @@ jobs:
              cd dev-js
              ls -a
              npm install
-             npm run greetings dev-js    
-        shell: bash
+             npm run user greetingsdev
       
  deploy-to-staging:
     needs: tests-on-dev
