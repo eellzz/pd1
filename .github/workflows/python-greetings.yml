@@ -33,13 +33,12 @@ jobs:
         run: npm install -g pm2
         shell: bash
         
-      - name: pm2
+      - name: deploy
         run: |
              cd dev
              ls -a
-  
-             pm2 start app.py --name greetings-app-dev -- --port 7001
-             
+             #pm2 delete greetings-app-dev & set "errorlevel=0"
+             pm2 start app.py --name greetings-app-dev -- --port 7001             
         shell: bash
         
  tests-on-dev:
@@ -47,6 +46,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: echo "testing on dev"
+      - uses: actions/checkout@v3.5.2
+      - uses: actions/checkout@v3.5.2
+        with:
+         repository: 'mtararujs/course-js-api-framework'
+         path: 'dev-js'
+        
+      - name: test
+        run: |
+             cd dev-js
+             ls -a
+             npm install
+             npm audit fix --force
+             #npm run greetings greetings_dev         
+        shell: bash
       
  deploy-to-staging:
     needs: tests-on-dev
@@ -63,11 +76,11 @@ jobs:
         run: npm install -g pm2
         shell: bash
         
-      - name: pm2
+      - name: deploy
         run: |
              cd staging
              ls -a
-
+             #pm2 delete greetings-app-staging & set "errorlevel=0"
              pm2 start app.py --name greetings-app-staging -- --port 7002
         shell: bash
       
@@ -76,6 +89,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: echo "testing on staging"
+      - uses: actions/checkout@v3.5.2
+      - uses: actions/checkout@v3.5.2
+        with:
+         repository: 'mtararujs/course-js-api-framework'
+         path: 'staging-js'
+        
+      - name: test
+        run: |
+             cd staging-js
+             ls -a
+             npm install
+             npm audit fix --force
+             #npm run greetings greetings_staging             
+        shell: bash
       
  deploy-to-preprod:
     needs: tests-on-staging
@@ -92,11 +119,11 @@ jobs:
         run: npm install -g pm2
         shell: bash
         
-      - name: pm2
+      - name: deploy
         run: |
              cd preprod
              ls -a
-             
+             #pm2 delete greetings-app-preprod & set "errorlevel=0"
              pm2 start app.py --name greetings-app-preprod -- --port 7003
         shell: bash
       
@@ -105,6 +132,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: echo "testing on preprod"
+      - uses: actions/checkout@v3.5.2
+      - uses: actions/checkout@v3.5.2
+        with:
+         repository: 'mtararujs/course-js-api-framework'
+         path: 'preprod-js'
+        
+      - name: test
+        run: |
+             cd preprod-js
+             ls -a
+             npm install
+             npm audit fix --force
+             #npm run greetings greetings_preprod             
+        shell: bash
       
  deploy-to-prod:
     needs: tests-on-preprod
@@ -121,11 +162,11 @@ jobs:
         run: npm install -g pm2
         shell: bash
         
-      - name: pm2
+      - name: deploy
         run: |
              cd prod
              ls -a
-             
+             #pm2 delete greetings-app-prod & set "errorlevel=0"
              pm2 start app.py --name greetings-app-prod -- --port 7004
         shell: bash
       
@@ -134,4 +175,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: echo "testing on prod"
+      - uses: actions/checkout@v3.5.2
+      - uses: actions/checkout@v3.5.2
+        with:
+         repository: 'mtararujs/course-js-api-framework'
+         path: 'prod-js'
+        
+      - name: test
+        run: |
+             cd prod-js
+             ls -a
+             npm install
+             npm audit fix --force
+             #npm run greetings greetings_prod             
+        shell: bash
       
