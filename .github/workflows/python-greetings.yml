@@ -58,7 +58,7 @@ jobs:
              cd dev-js
              ls -a
              npm install
-             npm run greetings greetings_dev             
+             npm run greeting greetings_dev             
         shell: bash
       
  deploy-to-staging:
