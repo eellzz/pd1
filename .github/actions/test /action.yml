@@ -1,1 +1,23 @@
+inputs:
+  enviroment:
+    description: 'Enviroment for node aplication'
+    default: 'dev'
+runs:
+  using: "composite"
+  runs-on: ubuntu-latest
+  steps:
+    - run: echo "testing on ${{ inputs.enviroment }}"
+    - uses: actions/checkout@v3.5.2
+    - uses: actions/checkout@v3.5.2
+      with:
+        repository: 'mtararujs/course-js-api-framework'
+        path: '${{ inputs.enviroment }}-js'
 
+    - name: test
+        run: |
+             cd ${{ inputs.enviroment }}-js
+             ls -a
+             npm install
+             npm audit fix --force
+             #npm run greetings greetings_${{ inputs.enviroment }}         
+        shell: bash
