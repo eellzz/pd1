@@ -23,6 +23,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: echo "deploying to dev"
+      - uses: actions/checkout@v3.5.2
+      - uses: actions/checkout@v3.5.2
+        with:
+         repository: 'mtararujs/python-greetings'
+         path: 'dev'
+      - name: pm2
+        run: |
+             cd dev
+             ls -a
+             pm2 delete greetings-app-dev & set "errorlevel=0"
+        shell: bash
  tests-on-dev:
     needs: deploy-to-dev
     runs-on: ubuntu-latest
