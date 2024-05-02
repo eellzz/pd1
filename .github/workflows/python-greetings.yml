@@ -2,17 +2,47 @@ name: GitHub Actions Demo
 run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
 on: [push]
 jobs:
-  Explore-GitHub-Actions:
+ install-pip-deps:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
-      - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
-      - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
-      - name: Check out repository code
-        uses: actions/checkout@v4
-      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
-      - run: echo "🖥️ The workflow is now ready to test your code on the runner."
-      - name: List files in the repository
-        run: |
-          ls ${{ github.workspace }}
-      - run: echo "🍏 This job's status is ${{ job.status }}."
+      - run: echo "installing pip deps"
+ deploy-to-dev:
+    needs: install-pip-deps
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "deploying to dev"
+ tests-on-dev:
+    needs: deploy-to-dev
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "testing on dev"
+ deploy-to-staging:
+    needs: tests-on-dev
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "deploying to staging"
+ tests-on-staging:
+    needs: deploy-to-staging
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "testing on staging"
+ deploy-to-preprod:
+    needs: tests-on-staging
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "deploying to preprod"
+ tests-on-preprod:
+    needs: deploy-to-preprod
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "testing on preprod"
+ deploy-to-prod:
+    needs: tests-on-preprod
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "deploying on prod"
+ tests-on-prod:
+    needs: deploy-to-prod
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "testing on prod"
