@@ -54,6 +54,7 @@ jobs:
         
       - name: test
         run: |
+             mkdir dev2
              cd dev2
              git clone mtararujs/course-js-api-framework
              ls -a
