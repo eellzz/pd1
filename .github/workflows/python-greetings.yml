@@ -12,7 +12,10 @@ jobs:
          repository: 'mtararujs/python-greetings'
          path: 'api-tests'
       - name: Install dependencies
-        run: cd api-tests
+        run: |
+             cd api-tests
+             ls -a
+             pip install -r requirements.txt
         shell: bash
       
  deploy-to-dev:
