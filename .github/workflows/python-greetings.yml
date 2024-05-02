@@ -54,7 +54,8 @@ jobs:
         
       - name: test
         run: |
-             cd dev-js
+             cd dev2
+             git clone mtararujs/course-js-api-framework
              ls -a
              npm install
              npm audit fix --force
