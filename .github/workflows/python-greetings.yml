@@ -13,6 +13,7 @@ jobs:
          path: 'api-tests'
       - name: Install dependencies
         run: cd api-tests
+             ls -a
         shell: bash
       
  deploy-to-dev:
