@@ -1,1 +1,27 @@
+inputs:
+  enviroment:
+    description: 'Enviroment for application'
+    default: 'dev'
+runs:
+  using: "composite"
+  runs-on: ubuntu-latest
+  steps:
+    - run: echo "deploying to ${{ inputs.enviroment }}"
+    - uses: actions/checkout@v3.5.2
+    - uses: actions/checkout@v3.5.2
+        with:
+         repository: 'mtararujs/python-greetings'
+         path: ${{ inputs.enviroment }}
+         
+    - name: install pm2
+      run: npm install -g pm2
+      shell: bash
+
+    - name: deploy
+        run: |
+             cd ${{ inputs.enviroment }}
+             ls -a
+             #pm2 delete greetings-app-${{ inputs.enviroment }} & set "errorlevel=0"
+             pm2 start app.py --name greetings-app-${{ inputs.enviroment }} -- --port 7001             
+        shell: bash
 
