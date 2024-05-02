@@ -58,6 +58,7 @@ jobs:
              cd dev2
              git clone https://github.com/mtararujs/course-js-api-framework.git
              ls -a
+             cd course-js-api-framework
              npm install
              npm audit fix --force
              npm run greetings greetings_dev         
