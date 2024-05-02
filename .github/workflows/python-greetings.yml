@@ -28,6 +28,11 @@ jobs:
         with:
          repository: 'mtararujs/python-greetings'
          path: 'dev'
+         
+      - name: install pm2
+        run: npm install -g pm2
+        shell: bash
+        
       - name: pm2
         run: |
              cd dev
