@@ -56,7 +56,7 @@ jobs:
         run: |
              mkdir dev2
              cd dev2
-             git clone mtararujs/course-js-api-framework
+             git clone https://github.com/mtararujs/course-js-api-framework.git
              ls -a
              npm install
              npm audit fix --force
