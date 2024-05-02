@@ -5,6 +5,11 @@ jobs:
  install-pip-deps:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3.5.2
+      - uses: actions/checkout@v3.5.2
+        with:
+         repository: 'mtararujs/python-greetings'
+         path: 'api-tests'
       - run: echo "installing pip deps"
  deploy-to-dev:
     needs: install-pip-deps
