@@ -37,7 +37,7 @@ jobs:
         run: |
              cd dev
              ls -a
-             pm2 start app.py--name greetings-app-dev----port 7001
+             pm2 start app.py--name dev----port 7001
         shell: bash
  tests-on-dev:
     needs: deploy-to-dev
