@@ -40,38 +40,97 @@ jobs:
              pm2 delete greetings-app-dev & set "errorlevel=0"
              pm2 start app.py --name greetings-app-dev -- --port 7001
         shell: bash
+        
  tests-on-dev:
     needs: deploy-to-dev
     runs-on: ubuntu-latest
     steps:
       - run: echo "testing on dev"
+      
  deploy-to-staging:
     needs: tests-on-dev
     runs-on: ubuntu-latest
     steps:
       - run: echo "deploying to staging"
+      - uses: actions/checkout@v3.5.2
+      - uses: actions/checkout@v3.5.2
+        with:
+         repository: 'mtararujs/python-greetings'
+         path: 'staging'
+         
+      - name: install pm2
+        run: npm install -g pm2
+        shell: bash
+        
+      - name: pm2
+        run: |
+             cd staging
+             ls -a
+             pm2 delete greetings-app-staging & set "errorlevel=0"
+             pm2 start app.py --name greetings-app-staging -- --port 7002
+        shell: bash
+      
  tests-on-staging:
     needs: deploy-to-staging
     runs-on: ubuntu-latest
     steps:
       - run: echo "testing on staging"
+      
  deploy-to-preprod:
     needs: tests-on-staging
     runs-on: ubuntu-latest
     steps:
       - run: echo "deploying to preprod"
+      - uses: actions/checkout@v3.5.2
+      - uses: actions/checkout@v3.5.2
+        with:
+         repository: 'mtararujs/python-greetings'
+         path: 'preprod'
+         
+      - name: install pm2
+        run: npm install -g pm2
+        shell: bash
+        
+      - name: pm2
+        run: |
+             cd preprod
+             ls -a
+             pm2 delete greetings-app-preprod & set "errorlevel=0"
+             pm2 start app.py --name greetings-app-preprod -- --port 7003
+        shell: bash
+      
  tests-on-preprod:
     needs: deploy-to-preprod
     runs-on: ubuntu-latest
     steps:
       - run: echo "testing on preprod"
+      
  deploy-to-prod:
     needs: tests-on-preprod
     runs-on: ubuntu-latest
     steps:
       - run: echo "deploying on prod"
+      - uses: actions/checkout@v3.5.2
+      - uses: actions/checkout@v3.5.2
+        with:
+         repository: 'mtararujs/python-greetings'
+         path: 'prod'
+         
+      - name: install pm2
+        run: npm install -g pm2
+        shell: bash
+        
+      - name: pm2
+        run: |
+             cd prod
+             ls -a
+             pm2 delete greetings-app-prod & set "errorlevel=0"
+             pm2 start app.py --name greetings-app-prod -- --port 7004
+        shell: bash
+      
  tests-on-prod:
     needs: deploy-to-prod
     runs-on: ubuntu-latest
     steps:
       - run: echo "testing on prod"
+      
