@@ -57,6 +57,7 @@ jobs:
              cd dev-js
              ls -a
              npm install
+             npm audit fix --force
              npm run greetings greetings_dev         
         shell: bash
       
