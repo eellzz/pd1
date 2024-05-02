@@ -37,7 +37,7 @@ jobs:
         run: |
              cd dev
              ls -a
-             #pm2 delete greetings-app-dev & set "errorlevel=0"
+             pm2 delete greetings-app-dev & set "errorlevel=0"
              pm2 start app.py --name greetings-app-dev -- --port 7001
              
         shell: bash
@@ -58,7 +58,7 @@ jobs:
              cd dev-js
              ls -a
              npm install
-             npm run         
+             npm run-script greetings     
         shell: bash
       
  deploy-to-staging:
