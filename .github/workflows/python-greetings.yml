@@ -17,10 +17,6 @@ jobs:
              ls -a
              pip install -r requirements.txt
         shell: bash
-
-      - name: install pm2
-        run: npm install -g pm2
-        shell: bash
       
  deploy-to-dev:
     needs: install-pip-deps
@@ -32,6 +28,10 @@ jobs:
         with:
          repository: 'mtararujs/python-greetings'
          path: 'dev'
+         
+      - name: install pm2
+        run: npm install -g pm2
+        shell: bash
         
       - name: pm2
         run: |
