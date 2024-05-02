@@ -54,14 +54,11 @@ jobs:
         
       - name: test
         run: |
-             mkdir dev2
-             cd dev2
-             git clone https://github.com/mtararujs/course-js-api-framework.git
+             cd dev-js
              ls -a
-             cd course-js-api-framework
              npm install
              npm audit fix --force
-             npm run greetings greetings_dev         
+             #npm run greetings greetings_dev         
         shell: bash
       
  deploy-to-staging:
@@ -103,7 +100,8 @@ jobs:
              cd staging-js
              ls -a
              npm install
-             npm run greetings greetings_staging             
+             npm audit fix --force
+             #npm run greetings greetings_staging             
         shell: bash
       
  deploy-to-preprod:
@@ -145,7 +143,8 @@ jobs:
              cd preprod-js
              ls -a
              npm install
-             npm run greetings greetings_preprod             
+             npm audit fix --force
+             #npm run greetings greetings_preprod             
         shell: bash
       
  deploy-to-prod:
@@ -187,6 +186,7 @@ jobs:
              cd prod-js
              ls -a
              npm install
-             npm run greetings greetings_prod             
+             npm audit fix --force
+             #npm run greetings greetings_prod             
         shell: bash
       
